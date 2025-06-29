@@ -1,0 +1,19 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ],
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "redhat.telemetry.enabled": true,
+    "sqltools.connections": [{
+        "name": "Compose Service",
+        "driver": "PostgreSQL",
+        "server": "db-postgre",
+        "port": 5432,
+        "database": "postgres",
+        "username": "postgres",
+        "password": "#sa123"
+    }]
+}

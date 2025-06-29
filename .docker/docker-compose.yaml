@@ -1,0 +1,33 @@
+services:
+  app-java-21:
+    container_name: app-java-21
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: wevertontsousa/amazoncorretto:alpine
+    volumes:
+      - ..:/app:cached
+      - ~/.ssh/:/home/appuser/.ssh/:ro
+    networks:
+      - app-java-21-network
+    depends_on:
+      - db-postgre
+    tty: true
+
+  db-postgre:
+    container_name: db-postgre
+    image: postgres:16.1-alpine3.19
+    environment:
+      - POSTGRES_PASSWORD=#sa123
+    networks:
+      - app-java-21-network
+    ports:
+      - 5432:5432
+    restart: always
+
+
+networks:
+  app-java-21-network:
+    driver: bridge
+    external: false
+    name: app-java-21-network

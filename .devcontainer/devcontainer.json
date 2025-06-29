@@ -1,0 +1,24 @@
+{
+  "name": "Java 21",
+  "dockerComposeFile": ["../.docker/docker-compose.yaml"],
+  "service": "app-java-21",
+  "workspaceFolder": "/app",
+  "forwardPorts": [5432],
+  "portsAttributes": {
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "redhat.java",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-dependency",
+        "mtxr.sqltools-driver-pg"
+      ]
+    }
+  },
+  "shutdownAction": "stopCompose"
+}
