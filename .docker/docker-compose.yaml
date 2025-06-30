@@ -4,6 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - SYSTEM_USERNAME=${SYSTEM_USERNAME}
+        - SYSTEM_USER_ID=${SYSTEM_USER_ID}
     image: wevertontsousa/amazoncorretto:alpine
     volumes:
       - ..:/app:cached
@@ -18,7 +21,7 @@ services:
     container_name: db-postgre
     image: postgres:16.1-alpine3.19
     environment:
-      - POSTGRES_PASSWORD=#sa123
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - app-java-21-network
     ports:
