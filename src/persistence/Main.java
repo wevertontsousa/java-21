@@ -1,15 +1,240 @@
 package persistence;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
-public class ProductDao {
+public class Main {
+  public static void main(String[] args) throws Exception {
+    ProductDao productDao = new ProductDao();
+
+    // Save
+    try {
+      productDao.save(new Product(
+        "Galaxy S24",
+        "Smartphone Samsung Galaxy S24 6,2\""
+          + " Galaxy AI 256GB Cinza 5G 8GB RAM Câm."
+          + " Tripla 50MP + Selfie 12MP Bateria 4000mAh Dual Chip",
+        new BigDecimal("3999.00"),
+        (short) 0
+      ));
+
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+    }
+
+    try {
+      productDao.save(new Product(
+        "Galaxy S25",
+        "Smartphone Samsung Galaxy S25 6,2\""
+          + " Galaxy AI 256GB Cinza 5G 8GB RAM Câm."
+          + " Tripla 50MP + Selfie 12MP Bateria 4000mAh Dual Chip",
+        new BigDecimal("3999.00"),
+        (short) 0)
+      );
+
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+    }
+
+    try {
+      productDao.save(new Product(
+        "Galaxy S26",
+        "Smartphone Samsung Galaxy S26 6,2\""
+          + " Galaxy AI 256GB Cinza 5G 8GB RAM Câm."
+          + " Tripla 50MP + Selfie 12MP Bateria 4000mAh Dual Chip",
+        new BigDecimal("3999.00"),
+        (short) 0
+      ));
+
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+    }
+
+    // Find all
+    productDao.findAll(5, 0).forEach((userModel_) -> System.out.println(userModel_));
+
+    // Find by id
+    var product = productDao.findById(3L);
+
+    if (product != null) {
+      System.out.println("READ one: " + product.toString());
+
+      // Update
+      product.setName("Galaxy S29");
+      product.setDescription(product.getDescription().replace("S26", "S29"));
+      product.setUpdatedAt();
+
+      try {
+        productDao.update(product);
+      } catch (RuntimeException e) {
+        System.out.println(e.getMessage());
+      }
+
+      System.out.println("UPDATE: " + productDao.findById(3L));
+
+      // Delete by id
+      try {
+        productDao.removeById(productDao.findById(2L).getId());
+      } catch (RuntimeException e) {
+        System.out.println(e.getMessage());
+      }
+
+    } else {
+      System.out.println("Recurso não encontrado.");
+    }
+
+    // Find all
+    productDao.findAll(5, 0).forEach((userModel_) -> System.out.println(userModel_));
+  }
+
+}
+
+
+class JdbcConnectionFactory {
+  public static Connection getConnection() {
+    Properties properties = new Properties();
+    String path = "/resources/application.properties";
+
+    try (InputStream inputStream = JdbcConnectionFactory.class.getResourceAsStream(path)) {
+      properties.load(inputStream);
+
+      final String url = properties.getProperty("database.url");
+      final String username = properties.getProperty("database.username");
+      final String password = properties.getProperty("database.password");
+
+      return DriverManager.getConnection(url, username, password);
+
+    } catch (IOException e) {
+      throw new RuntimeException("Arquivo properties não encontrado.");
+
+    } catch (SQLException e) {
+      throw new RuntimeException("Erro ao tentar conectar-se ao banco de dados.");
+    }
+  }
+
+}
+
+
+class Product {
+  private long id;
+  private String name;
+  private String description;
+  private BigDecimal price;
+  private short discount;
+  private Instant createdAt;
+  private Instant updatedAt;
+
+  public Product(String name, String description, BigDecimal price, short discount) {
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    this.discount = discount;
+    this.createdAt = Instant.now();
+  }
+
+  public Product(long id, String name, String description, BigDecimal price, short discount, Instant createdAt) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    this.discount = discount;
+    this.createdAt = createdAt;
+    this.updatedAt = Instant.now();
+  }
+
+  public Product(
+    long id,
+    String name,
+    String description,
+    BigDecimal price,
+    short discount,
+    Instant createdAt,
+    Instant updatedAt
+  ) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    this.discount = discount;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+  }
+
+  public long getId() {
+    return this.id;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getDescription() {
+    return this.description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public BigDecimal getPrice() {
+    return this.price;
+  }
+
+  public void setPrice(BigDecimal price) {
+    this.price = price;
+  }
+
+  public short getDiscount() {
+    return discount;
+  }
+
+  public void setDiscount(short discount) {
+    this.discount = discount;
+  }
+
+  public Instant getCreatedAt() {
+    return this.createdAt;
+  }
+
+  public Instant getUpdatedAt() {
+    return this.updatedAt;
+  }
+
+  public void setUpdatedAt() {
+    this.updatedAt = Instant.now();
+  }
+
+  @Override
+  public String toString() {
+    return "<Product("
+      + "id=" + id
+      + ", name=" + name
+      + ", description=" + description.substring(0, 30).strip()
+      + ", price=" + price
+      + ", discount=" + discount
+      + ")>";
+  }
+
+}
+
+
+class ProductDao {
 
   private Connection connection;
 
@@ -219,7 +444,5 @@ public class ProductDao {
       throw new RuntimeException("Erro ao tentar executar operação SQL DDL.");
     }
   }
-
-  // .execute - DDL, DML e DQL - return boolean - usar quando o SQL for gerado dinâmico
 
 }

@@ -37,6 +37,25 @@
 - [Exemplo de uso](./src/persistence/ProductDaoUsage.java)
 
 
-### Dicas
+## Dicas
 
-Para usar uma biblioteca de terceiros (externa) sem, nenhuma ferramenta de construção (Maven, Gradle), é preciso baixar a biblioteca diretamente do site [MVN REPOSITORY](https://mvnrepository.com/) e salvar o arquivo ".jar" no diretório "/lib" que fica na raiz do projeto Java.
+
+### Bibliotecas
+
+Para usar uma biblioteca de terceiros (externa) sem, nenhuma ferramenta de construção (Maven, Gradle), é preciso baixar a biblioteca diretamente do site [Maven Central Repository](https://search.maven.org/) ou [MVN REPOSITORY](https://mvnrepository.com/) e salvar o arquivo ".jar" no diretório "/lib" que fica na raiz do projeto Java.
+
+
+### Persistência
+
+Além dos métodos `.executeQuery()` e `executeUpdate()`, existe o método `.execute`, que representa no SQL (DDL, DML e DQL), ele returna `boolean`, usar quando o SQL for gerado de forma dinâmica.
+
+
+### Gambiarra
+
+É possível dentro de um único arquivo Java ter: Class; Interface; Enum; Record...
+
+Mas para isso ser possível, só um dos tipos deve/pode ser público e esse tipo que é público deve ter o mesmo nome do arquivo.
+
+Para fins didáticos ou em casos extremos (talvez), de resto é bem improvável.
+
+- [Exemplo em código](./src/basic/AllInOneFile.java)

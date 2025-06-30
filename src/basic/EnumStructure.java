@@ -14,20 +14,20 @@ public class EnumStructure {
     Role role = Role.valueOf("user".toUpperCase());
   }
 
+}
 
-  public enum Role {
-    ADMIN("administrador"),
-    USER("usuário");
 
-    private String description;
+enum Role {
+  ADMIN("administrador"),
+  USER("usuário");
 
-    Role(String description) {
-      this.description = description;
-    }
+  private String description;
 
-    public String description() {
-      return this.description;
-    }
+  Role(String description) {
+    this.description = description;
   }
 
+  public String description() {
+    return this.description;
+  }
 }

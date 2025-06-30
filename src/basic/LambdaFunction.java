@@ -18,15 +18,17 @@ public class LambdaFunction {
       System.out.println(result);
   }
 
+}
 
-  public interface Foo {
-    /**
-     * Interface para ser implementada através de um Função Lambda.
-     * @param operatingLeft - operando a esquerda do operador.
-     * @param operatingRight - operando a direita do operador.
-     * @return um número decimal resultante da operação entre os operandos.
-     */
-    public abstract double execute(double operatingLeft, double operatingRight);
-  }
+
+interface Foo {
+
+  /**
+   * Interface para ser implementada através de um Função Lambda.
+   * @param operatingLeft - operando a esquerda do operador.
+   * @param operatingRight - operando a direita do operador.
+   * @return um número decimal resultante da operação entre os operandos.
+   */
+  public abstract double execute(double operatingLeft, double operatingRight);
 
 }

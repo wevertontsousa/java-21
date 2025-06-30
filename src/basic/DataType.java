@@ -22,7 +22,7 @@ public class DataType {
   private BigDecimal bigDecimalType; // Precisão exata; mais lento que os Primitivos; ideal para Bancos
   private String stringType; // Imutável
 
-  // Wrappers - Primitivo em forma de Objeto
+  // Wrappers - Primitivo em forma de Objeto - Só se realmente for necessário (performance)
   private Byte byteWrapperType;
   private Short shortWrapperType;
   private Integer intWrapperType;
