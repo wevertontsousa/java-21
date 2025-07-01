@@ -1,11 +1,5 @@
 package basic;
 
-/**
- * É simplsmente implementar uma Interface sem usar uma Classe.
- *
- * Interfaces Funcionais prontas do Java:
- * https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html
- */
 public class LambdaFunction {
 
     public static void main(String[] args) {

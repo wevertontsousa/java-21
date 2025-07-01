@@ -6,7 +6,7 @@ public class AssignmentOperator {
   public static void main(String[] args) {
     int variable = 5;
     final double CONSTANT = 3.14159;
-    var typeInference = "Weverton";
+    var typeInference = "Weverton"; // A palavra-chave `var`, requer a inicialização do valor.
 
     // Referência, quando variáveis apontam para o mesmo local na memória
     Comment comment = new Comment();

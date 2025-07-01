@@ -1,6 +1,6 @@
 package basic;
 
-public class EnumStructure {
+public class EnumType {
 
   @SuppressWarnings(value = "unused")
   public static void main(String[] args) {

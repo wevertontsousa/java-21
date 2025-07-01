@@ -1,9 +1,5 @@
 package basic;
 
-/*
- * Diferente do `static` membros de instância resolvido em tempo de execução
- * através de (dynamic dispatch).
- */
 public class ThisKeyword {
 
   @SuppressWarnings(value = "unused")

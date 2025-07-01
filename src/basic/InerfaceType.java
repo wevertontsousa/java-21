@@ -1,6 +1,6 @@
 package basic;
 
-public interface InerfaceStructure {
+public interface InerfaceType {
 
   public abstract void foo();
 
