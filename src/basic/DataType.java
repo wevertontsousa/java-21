@@ -3,6 +3,8 @@ package basic;
 import java.math.BigDecimal;
 
 public class DataType {
+
+  @SuppressWarnings(value = "unused")
   public static void main(String[] args) {
     // String
     String firstName = "Weverton";
