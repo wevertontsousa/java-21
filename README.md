@@ -35,3 +35,9 @@
 - [📝 Sobre](https://www.notion.so/Depend-ncias-2235853c3cbb8058b700c10c85dc6b06?source=copy_link)
 - [📦 Driver PostgreSQL](./lib/postgresql-42.7.3.jar)
 - [👨🏾‍💻 Persistência](./src/persistence/Main.java)
+
+
+## Padrões de Design
+
+- [👨🏾‍💻 Fábrica](./src/pattern/Factory.java) | [📝 Sobre](https://www.notion.so/F-brica-2285853c3cbb8040bd40d3eade5cc9c2?source=copy_link)
+- [👨🏾‍💻 Construtor](./src/pattern/Builder.java) | [📝 Sobre](https://www.notion.so/Construtor-2285853c3cbb80c28a19ff741124d3f8?source=copy_link)

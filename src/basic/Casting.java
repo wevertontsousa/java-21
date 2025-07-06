@@ -2,6 +2,7 @@ package basic;
 
 class Casting {
 
+  @SuppressWarnings(value = "unused")
   public static void main(String[] args) {
     // Implícito - Widening ou Upcasting
     int foo = 10;
@@ -15,16 +16,16 @@ class Casting {
     Animal dog = new Dog();
     
     // Explícito - Downcasting
-    Dog animal = Animal();
+    Dog animal = (Dog) new Animal();
 
     // Explícito seguro
-    if (animal instanceof dog) {
-      Dog animalOther = new Animal();
+    if (animal instanceof Dog) {
+      Dog animalOther = (Dog) new Animal();
     }
 
     // Explícito seguro
     try {
-       Dog animalOther= new Animal();
+       Dog animalOther = (Dog) new Animal();
     } catch (ClassCastException e) {
     }
   }
@@ -32,5 +33,12 @@ class Casting {
 }
 
 
-class Animal { }
-class Dog extends Animal { }
+class Animal {
+  Animal() {
+  }
+}
+
+class Dog extends Animal {
+  Dog() {
+  }
+}
